@@ -16,6 +16,8 @@ public class User implements Serializable{
 
 	private Date lastVisit;
 
+	private String prodTableName;
+
 	public String getLastIp() {
 		return lastIp;
 	}
@@ -63,4 +65,8 @@ public class User implements Serializable{
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
+
+	public String getProdTableName(){return this.prodTableName;}
+
+	public void setProdTableName(){this.prodTableName = "t_" + userName + "_prod";}
 }

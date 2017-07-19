@@ -20,6 +20,10 @@ public class UserService {
 		int matchCount =userDao.getMatchCount(userName, password);
 		return matchCount > 0;
 	}
+
+	public boolean isUserNameExist(String userName){
+		return userDao.findUserName(userName);
+	}
 	
 	public User findUserByUserName(String userName) {
 		return userDao.findUserByUserName(userName);
@@ -34,6 +38,19 @@ public class UserService {
 		loginLog.setLoginDate(user.getLastVisit());
         userDao.updateLoginInfo(user);
         loginLogDao.insertLoginLog(loginLog);
+	}
+
+	@Transactional
+	public boolean registerUser(String userName, String password){
+		//User user = findUserByUserName(userName);
+		//if(user!=null) return false;
+		User user;
+		user = new User();
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setCredits(5);
+		userDao.insertUser(user);
+		return true;
 	}
 
 	@Autowired
